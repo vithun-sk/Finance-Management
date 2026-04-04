@@ -1,0 +1,7 @@
+.insights-div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 18vw;
+  min-height: 100vh;
+  background: transparent;
+}
