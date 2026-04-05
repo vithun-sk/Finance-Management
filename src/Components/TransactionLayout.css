@@ -1,6 +1,6 @@
 .transaction-lists {
-  background-color: #1a2035;
-  border: 2px solid #2a3a5c;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
   margin: 0px 60px 0px 30px;
   padding: 10px;
   color: var(--text-primary);
@@ -15,7 +15,7 @@
   margin-bottom: 40px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
-  border-bottom: 2px solid #2a3a5c;
+  border-bottom: 2px solid var(--card-border);
 }
 .transaction-row {
   display: flex;
@@ -24,7 +24,7 @@
   padding: 10px;
 }
 .transaction-lists:hover {
-  background-color: #1a2035bb;
+  background-color: var(--transaction-hover-bg);
   transform: translateY(-2px);
 }
 .item-title {
@@ -35,12 +35,11 @@
 .item-category {
   font-weight: 300;
   font-size: 15px;
-  color: #91a3c6;
-  color: orange;
+  color: var(--category-color);
 }
 .expense-dis {
   background-color: rgba(232, 85, 85, 0.15);
-  border: 2px solid #e85555;
+  border: 2px solid var(--danger);
   color: #ff6b6b;
   height: 25px;
   border-radius: 10px;
@@ -50,8 +49,8 @@
 }
 .income-dis {
   background-color: rgba(46, 204, 138, 0.15);
-  border: 2px solid #2ecc8a;
-  color: #2ecc8a;
+  border: 2px solid var(--success);
+  color: var(--success);
   height: 25px;
   border-radius: 10px;
   padding: 5px;
@@ -60,8 +59,8 @@
 }
 .savings-dis {
   background-color: rgba(247, 178, 79, 0.15);
-  border: 2px solid #f7b24f;
-  color: #f7b24f;
+  border: 2px solid var(--warning);
+  color: var(--warning);
   height: 25px;
   border-radius: 10px;
   padding: 5px;
@@ -90,15 +89,17 @@
   justify-content: center;
   align-items: center;
   background: none;
-  color: white;
+}
+.edit-action {
+  color: var(--text-primary);
 }
 .delete-action {
   background-color: rgba(232, 85, 85, 0.15);
-  border: 2px solid #e85555;
+  border: 2px solid var(--danger);
   color: #ff6b6b;
 }
 .edit-action:hover {
-  background-color: rgba(255, 255, 255, 0.156);
+  background-color: var(--edit-hover-bg);
   transform: translateY(-5px);
   transition-duration: 0.3s;
 }
@@ -114,14 +115,14 @@
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .edit-transac-overlay-form {
-  background-color: #0d1117;
-  border: 2px solid #2a3a5c;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
   width: 600px;
   height: auto;
   max-height: 90vh;
@@ -151,11 +152,11 @@
 .edit-overlay-sec2 button {
   width: 160px;
   padding: 8px;
-  background-color: #1a2035;
+  background-color: var(--card-bg);
   border-radius: 10px;
   color: var(--text-primary);
   font-size: 16px;
-  border: 2px solid #2a3a5c;
+  border: 2px solid var(--card-border);
   cursor: pointer;
 }
 
@@ -176,9 +177,9 @@
   width: 450px;
   border-radius: 10px;
   border: none;
-  color: rgba(255, 255, 255, 0.851);
-  background-color: #1a2035;
-  border: 2px solid #2a3a5c;
+  color: var(--input-text);
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -191,7 +192,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .edit-form-div input:focus,
 .edit-form-div select:focus {
   border: 1px solid #4f8df7db;
-  box-shadow: 0px 8px 24px rgba(79, 142, 247, 0.2);
+  box-shadow: 0px 8px 24px var(--shadow-md);
   outline: none;
 }
 .edit-form-actions {
@@ -207,14 +208,89 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 40px;
   font-size: 18px;
   border-radius: 10px;
-  background-color: #1a2035;
-  color: rgba(255, 255, 255, 0.851);
-  border: 2px solid #2a3a5c;
+  background-color: var(--card-bg);
+  color: var(--input-text);
+  border: 2px solid var(--card-border);
   cursor: pointer;
 }
 
 .edit-form-actions button:hover {
   transform: translateY(-3px);
   transition-duration: 0.2s;
-  opacity: 0.6;
+  opacity: 0.8;
+}
+/* ═══════════════════════════════════
+   TABLET (768px – 1169px)
+═══════════════════════════════════ */
+@media (max-width: 1169px) {
+  .transaction-lists {
+    margin: 0px 20px 0px 20px;
+  }
+}
+
+/* ═══════════════════════════════════
+   MOBILE (350px – 468px)
+═══════════════════════════════════ */
+@media (max-width: 468px) {
+  .transaction-lists {
+    margin: 0px 16px 0px 16px;
+    padding: 6px;
+  }
+  .transaction-row {
+    padding: 8px 6px;
+    gap: 8px;
+  }
+  .item-title {
+    font-size: 14px;
+  }
+  .item-category {
+    font-size: 11px;
+  }
+
+  /* Hide type badge — colored amount replaces it */
+  .expense-dis,
+  .income-dis,
+  .savings-dis {
+    display: none;
+  }
+
+  /* Color the amount text based on type */
+  .transac-type h4.loss {
+    color: #e85555;
+    font-size: 15px;
+  }
+  .transac-type h4.profit {
+    color: #2ecc8a;
+    font-size: 15px;
+  }
+  /* Savings amount — orange */
+  .transac-type h4:not(.loss):not(.profit) {
+    color: #f7b24f;
+    font-size: 15px;
+  }
+
+  .transac-type {
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .edit-action,
+  .delete-action {
+    width: 32px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  /* Edit modal — centered, not full screen */
+  .edit-transac-overlay {
+    align-items: center;
+    padding: 16px;
+  }
+  .edit-transac-overlay-form {
+    width: 100%;
+    max-width: 420px;
+    max-height: 88vh;
+    border-radius: 16px;
+    border: 2px solid var(--card-border);
+  }
 }

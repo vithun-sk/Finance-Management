@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { sampleTransactions } from "../SampleData/Data.js";
 import "../Styles/Dashboard.css";
+import { CiLight, CiDark } from "react-icons/ci";
 import { AiOutlineWallet } from "react-icons/ai";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCreditCard2Back, BsPiggyBank } from "react-icons/bs";
@@ -27,29 +28,41 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "dark",
+  );
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  const [transactions, setTransactions] = useState(() => {
+    const stored = localStorage.getItem("transactions");
+    return stored ? JSON.parse(stored) : sampleTransactions;
+  });
+
   //cards
-  const totalIncome = sampleTransactions
+  const totalIncome = transactions
     .filter((t) => t.type === "income")
     .reduce((sum, t) => sum + t.amount, 0);
 
-  const totalSavings = sampleTransactions
+  const totalSavings = transactions
     .filter((t) => t.type === "savings")
     .reduce((sum, t) => sum + t.amount, 0);
 
-  const totalExpenses = sampleTransactions
+  const totalExpenses = transactions
     .filter((t) => t.type === "expense")
     .reduce((sum, t) => sum + t.amount, 0);
 
   const totalBalance = totalIncome - totalExpenses;
 
   //graphs
-  const dailyExpenses = sampleTransactions
+  const dailyExpenses = transactions
     .filter((t) => t.type === "expense")
     .sort((a, b) => new Date(a.date) - new Date(b.date))
     .map((t) => ({
       date: new Date(t.date).toLocaleDateString("en-IN", {
         day: "numeric",
-        month: "short", 
+        month: "short",
       }),
       amount: t.amount,
     }));
@@ -68,7 +81,7 @@ const Dashboard = () => {
     ],
   };
 
-  const categoryTotals = sampleTransactions
+  const categoryTotals = transactions
     .filter((t) => t.type === "expense")
     .reduce((acc, t) => {
       acc[t.category] = (acc[t.category] || 0) + t.amount;
@@ -83,15 +96,21 @@ const Dashboard = () => {
         backgroundColor: [
           "#4f8ef7",
           "#2ecc8a",
+          "#f755ae",
           "#e85555",
           "#f7b24f",
           "#a855f7",
+          "#f455f7",
+          "#cff755",
         ],
         borderColor: "#1a2035",
         borderWidth: 2,
       },
     ],
   };
+  const isDark =
+    document.documentElement.getAttribute("data-theme") !== "light";
+
   const lineOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -107,12 +126,12 @@ const Dashboard = () => {
     },
     scales: {
       x: {
-        ticks: { color: "#8b949e" },
-        grid: { color: "#2a3a5c" },
+        ticks: { color: isDark ? "#8b949e" : "#4a5568" },
+        grid: { color: isDark ? "#2a3a5c" : "#e2e8f0" },
       },
       y: {
-        ticks: { color: "#8b949e" },
-        grid: { color: "#2a3a5c" },
+        ticks: { color: isDark ? "#8b949e" : "#4a5568" },
+        grid: { color: isDark ? "#2a3a5c" : "#e2e8f0" },
       },
     },
   };
@@ -123,7 +142,7 @@ const Dashboard = () => {
     plugins: {
       legend: {
         position: "bottom",
-        labels: { color: "#e6edf3", padding: 15 },
+        labels: { color: isDark ? "#e6edf3" : "#1a202c", padding: 15 },
       },
       tooltip: {
         backgroundColor: "#1a2035",
@@ -144,13 +163,22 @@ const Dashboard = () => {
               Welcome back! Here's your financial summary
             </p>
           </div>
-          <div className="head-date">
-            {new Date().toLocaleDateString("en-IN", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+          <div className="date-theme">
+            <div className="theme-toggle">
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              >
+                {theme === "dark" ? <CiLight /> : <CiDark />}
+              </button>
+            </div>
+            <div className="head-date">
+              {new Date().toLocaleDateString("en-IN", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </div>
           </div>
         </header>
         <main className="cards">
@@ -161,7 +189,6 @@ const Dashboard = () => {
                 color: "#4f8ef7",
                 marginBottom: "8px",
               }}
-              
             />
             <h3>Total Balance</h3>
             <p>₹{totalBalance.toLocaleString()}</p>
@@ -202,30 +229,16 @@ const Dashboard = () => {
         </main>
         <section className="chart-sections">
           <div className="expense-graph">
-            <h3
-              style={{
-                color: "#e6edf3",
-                marginBottom: "20px",
-                padding: "20px",
-              }}
+            <h3 className="chart-title">Daily Expenses</h3>
+            <div
+              style={{ height: "350px", width: "600px", paddingLeft: "30px" }}
             >
-              Daily Expenses
-            </h3>
-            <div style={{ height: "300px" }}>
               <Line data={lineData} options={lineOptions} />
             </div>
           </div>
           <div className="category-graph">
-            <h3
-              style={{
-                color: "#e6edf3",
-                marginBottom: "20px",
-                padding: "20px",
-              }}
-            >
-              Spending by Category
-            </h3>
-            <div style={{ height: "300px" }}>
+            <h3 className="chart-title">Spending by Category</h3>
+            <div style={{ height: "350px", width: "500px" }}>
               <Pie data={pieData} options={pieOptions} />
             </div>
           </div>

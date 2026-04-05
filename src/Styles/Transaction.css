@@ -18,7 +18,7 @@
 .records-details p {
   color: var(--text-primary);
   font-size: 13px;
-  color: #8b949e;
+  color: var(--text-secondary);
   padding: 5px;
 }
 .records-details h2 {
@@ -26,10 +26,28 @@
   font-size: 24px;
   padding: 2px;
 }
+.export-addTrans {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-right: 30px;
+}
+.export-btn {
+  padding: 10px;
+  background-color: var(--sidebar-active);
+  color: white;
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px 0px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 .add-transac-btn {
   padding: 10px;
   background-color: var(--sidebar-active);
-  color: var(--text-primary);
+  color: white;
   width: 150px;
   height: 50px;
   border-radius: 10px;
@@ -38,9 +56,10 @@
   cursor: pointer;
   transition: transform 0.2s ease;
 }
-.add-transac-btn:hover {
+.add-transac-btn:hover,
+.export-btn:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 3px 16px rgba(59, 96, 160, 0.873);
+  box-shadow: 0px 3px 16px var(--shadow-btn);
 }
 .new-transac-overlay {
   position: fixed;
@@ -49,14 +68,14 @@
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--modal-overlay);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .transac-overlay-form {
-  background-color: #0d1117;
-  border: 2px solid #2a3a5c;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
   width: 600px;
   height: 560px;
   border-radius: 15px;
@@ -68,6 +87,7 @@
   padding: 15px;
   justify-content: space-between;
 }
+
 .cross-btn {
   background: none;
   border: none;
@@ -84,11 +104,11 @@
 .btn {
   width: 160px;
   padding: 8px;
-  background-color: #1a2035;
+  background-color: var(--card-bg);
   border-radius: 10px;
   color: var(--text-primary);
   font-size: 16px;
-  border: 2px solid #2a3a5c;
+  border: 2px solid var(--card-border);
   cursor: pointer;
 }
 .btn:hover {
@@ -101,17 +121,17 @@
 }
 .btn.expense {
   background-color: rgba(232, 85, 85, 0.15);
-  border: 2px solid #e85555;
+  border: 2px solid var(--danger);
   color: #ff6b6b;
 }
 .btn.income {
   background-color: rgba(46, 204, 138, 0.15);
-  border: 2px solid #2ecc8a;
+  border: 2px solid var(--success);
   color: #2ecc8a;
 }
 .btn.savings {
   background-color: rgba(247, 178, 79, 0.15);
-  border: 2px solid #f7b24f;
+  border: 2px solid var(--warning);
   color: #f7b24f;
 }
 .form-div {
@@ -131,14 +151,17 @@
   width: 450px;
   border-radius: 10px;
   border: none;
-  color: rgba(255, 255, 255, 0.851);
-  background-color: #1a2035;
-  border: 2px solid #2a3a5c;
+  color: var(--input-text);
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
+}
+[data-theme="light"] input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0);
 }
 .form-div select {
   cursor: pointer;
@@ -146,7 +169,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .form-div input:focus,
 .form-div select:focus {
   border: 1px solid #4f8df7db;
-  box-shadow: 0px 8px 24px rgba(79, 142, 247, 0.2);
+  box-shadow: 0px 8px 24px var(--shadow-md);
   outline: none;
 }
 .form-actions {
@@ -161,16 +184,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   height: 40px;
   font-size: 18px;
   border-radius: 10px;
-  background-color: #1a2035;
-  color: rgba(255, 255, 255, 0.851);
-  border: 2px solid #2a3a5c;
+  background-color: var(--card-bg);
+  color: var(--input-text);
+  border: 2px solid var(--card-border);
   cursor: pointer;
 }
 
 .form-actions button:hover {
   transform: translateY(-3px);
   transition-duration: 0.2s;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 .filter-div {
   display: flex;
@@ -180,42 +203,64 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .filter-top {
   display: flex;
-  flex-direction: row ;
-  gap: 60px;
+  flex-direction: row;
+  gap: 30px;
   align-items: center;
 }
 .search-box {
-  width: 1000px;
+  width: 960px;
 }
 .search-box input {
   width: 100%;
   height: 40px;
-  background-color: #1a2035;
-  border: 2px solid #2a3a5c;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
   padding-left: 15px;
   border-radius: 10px;
-  color: rgba(255, 255, 255, 0.851);
+  color: var(--input-text);
   font-size: 16px;
 }
 .search-box input:focus {
   border: 1px solid #4f8df7db;
-  box-shadow: 0px 8px 24px rgba(79, 142, 247, 0.2);
+  box-shadow: 0px 8px 24px var(--shadow-md);
   outline: none;
 }
-.filter-btn button {
-  width: 100px;
+.order-btn {
+  width: 40px;
   height: 40px;
-  background-color: #1a2035;
-  border: 2px solid #2a3a5c;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
   border-radius: 10px;
-  color: rgba(255, 255, 255, 0.851);
+  color: var(--input-text);
   font-size: 16px;
   cursor: pointer;
 }
-.filter-btn button:hover {
+.inactive-filter-btn {
+  width: 100px;
+  height: 40px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--input-text);
+  font-size: 16px;
+  cursor: pointer;
+}
+.active-filter-btn {
+  width: 100px;
+  height: 40px;
+  background-color: var(--sidebar-active);
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--input-text);
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+}
+.filter-btn button:hover,
+.order-btn:hover {
   transform: translateY(-3px);
   transition-duration: 0.2px;
-  box-shadow: 0px 8px 24px rgba(79, 142, 247, 0.2);
+  box-shadow: 0px 8px 24px var(--shadow-md);
 }
 
 .filter-overlay {
@@ -223,11 +268,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 76vw;
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  background-color: #1a2035;
-  border: 2px solid #2a3a5c;
+  gap: 15px;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
   border-radius: 10px;
-  padding: 20px;
+  padding: 15px;
 }
 .filter-form {
   display: flex;
@@ -242,17 +287,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .filter-form select {
   margin-left: 10px;
   padding: 10px;
-  width: 250px;
+  width: 220px;
   border-radius: 10px;
   border: none;
-  color: rgba(255, 255, 255, 0.851);
-  background-color: #1a2035;
-  border: 2px solid #2a3a5c;
+  color: var(--input-text);
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
 }
 .filter-form input:focus,
 .filter-form select:focus {
   border: 1px solid #4f8df7db;
-  box-shadow: 0px 8px 24px rgba(79, 142, 247, 0.2);
+  box-shadow: 0px 8px 24px var(--shadow-md);
   outline: none;
 }
 .reset-btn {
@@ -261,11 +306,312 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 10px;
   border: none;
   background-color: var(--sidebar-active);
-  color: var(--text-primary);
+  color: white;
   cursor: pointer;
 }
-.reset-btn:hover{
+.reset-btn:hover {
   transform: translateY(-5px);
   transition-duration: 0.3s;
-  box-shadow: 0px 3px 16px rgba(59, 96, 160, 0.873);
+  box-shadow: 0px 3px 16px var(--shadow-btn);
+}
+.empty-state-div {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  color: var(--text-primary);
+}
+/* ═══════════════════════════════════
+   TABLET (768px – 1169px)
+═══════════════════════════════════ */
+@media (max-width: 1169px) {
+  .transaction-div {
+    margin-left: 0;
+    padding-top: 60px;
+  }
+  .head {
+    width: 100vw;
+    padding: 14px 20px;
+  }
+  .date-theme .theme-toggle {
+    display: none;
+  }
+  .records-details {
+    margin: 16px 20px;
+  }
+  .export-addTrans {
+    margin-right: 0;
+    gap: 10px;
+  }
+  /* Tab: keep text buttons normal */
+  .export-btn,
+  .add-transac-btn {
+    width: 140px;
+    height: 44px;
+    font-size: 14px;
+    margin: 0;
+  }
+  .filter-div {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .filter-top {
+    gap: 12px;
+  }
+  .search-box {
+    width: 100%;
+  }
+  .filter-overlay {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .filter-form input,
+  .filter-form select {
+    width: 180px;
+  }
+  .transaction-lists {
+    margin: 0px 20px 0px 20px;
+  }
+  .transac-overlay-form {
+    width: 85vw;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .form-div input,
+  .form-div select {
+    width: 100%;
+    margin-left: 0;
+  }
+  .edit-transac-overlay-form {
+    width: 85vw;
+  }
+  .edit-form-div input,
+  .edit-form-div select {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* ═══════════════════════════════════
+   MOBILE (350px – 468px)
+═══════════════════════════════════ */
+@media (max-width: 468px) {
+  .btn-text {
+    display: none;
+  }
+  .btn-icon {
+    font-size: 20px;
+  }
+  .transaction-div {
+    margin-left: 0;
+    padding-top: 56px;
+    padding-bottom: 75px;
+  }
+  .head {
+    width: 100vw;
+    padding: 12px 16px;
+  }
+  .head h1 {
+    font-size: 20px;
+  }
+  .head-sub {
+    font-size: 12px;
+  }
+  .date-theme {
+    display: none;
+  }
+
+  /* Records row — title left, icon buttons right */
+  .records-details {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 16px;
+  }
+  .export-addTrans {
+    margin-right: 0;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+  }
+  /* Icon-only round buttons */
+  .export-btn,
+  .add-transac-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  /* Search + filter row — consistent margin */
+  .filter-div {
+    margin: 0 16px;
+    gap: 10px;
+  }
+  .filter-top {
+    gap: 8px;
+    align-items: center;
+  }
+  .search-box {
+    flex: 1;
+    width: auto;
+  }
+  .search-box input {
+    font-size: 14px;
+    height: 38px;
+  }
+  .order-btn {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+  .inactive-filter-btn,
+  .active-filter-btn {
+    width: 80px;
+    height: 38px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* Filter overlay — 2 column grid */
+  .filter-overlay {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 12px;
+    margin-right: 0;
+  }
+  .filter-form {
+    width: 100%;
+  }
+  .filter-form label {
+    font-size: 13px;
+    padding: 4px 6px;
+  }
+  .filter-form input,
+  .filter-form select {
+    width: 100%;
+    margin-left: 0;
+    font-size: 13px;
+    padding: 8px;
+  }
+  .reset-btn {
+    width: 100%;
+    font-size: 13px;
+    padding: 8px;
+    grid-column: span 2;
+  }
+
+  /* Transaction list */
+  .transaction-lists {
+    margin: 0px 16px 0px 16px;
+  }
+  .transaction-lists:first-child {
+    margin-top: 14px;
+  }
+  .item-title {
+    font-size: 14px;
+  }
+  .item-category {
+    font-size: 11px;
+  }
+
+  /* Remove type badge on mobile — use colored amount instead */
+  .expense-dis,
+  .income-dis,
+  .savings-dis {
+    display: none;
+  }
+  .transac-type {
+    gap: 8px;
+    align-items: center;
+  }
+
+  /* Modal — NOT full screen, centered overlay */
+  .new-transac-overlay,
+  .edit-transac-overlay {
+    align-items: center;
+    padding: 16px;
+  }
+  .transac-overlay-form {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    max-height: 88vh;
+    overflow-y: auto;
+    border-radius: 16px;
+  }
+  .edit-transac-overlay-form {
+    width: 100%;
+    max-width: 420px;
+    max-height: 88vh;
+    border-radius: 16px;
+  }
+  /* Smaller inputs in modal */
+  .form-div {
+    margin: 6px 10px;
+  }
+  .form-div label {
+    font-size: 14px;
+    padding: 6px;
+  }
+  .form-div input,
+  .form-div select {
+    width: 100%;
+    margin-left: 0;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .edit-form-div {
+    margin: 6px 10px;
+  }
+  .edit-form-div label {
+    font-size: 14px;
+    padding: 6px;
+  }
+  .edit-form-div input,
+  .edit-form-div select {
+    width: 100%;
+    margin-left: 0;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .btn {
+    width: 80px;
+    font-size: 13px;
+    padding: 6px;
+  }
+  .edit-overlay-sec2 button {
+    width: 80px;
+    font-size: 13px;
+  }
+  .form-actions {
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .form-actions button {
+    width: 120px;
+    height: 38px;
+    font-size: 14px;
+  }
+  .edit-form-actions {
+    gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .edit-form-actions button {
+    width: 120px;
+    height: 38px;
+    font-size: 14px;
+  }
 }

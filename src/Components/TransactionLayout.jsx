@@ -52,7 +52,7 @@ const TransactionLayout = ({ item, onDelete, transactions, setTransactions }) =>
             <h4 className="item-title">{item.title}</h4>
             <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
               <p className="item-category">{item.category}</p>
-              <p style={{ fontSize: "14px", color: "grey" }}>
+              <p style={{ fontSize: "14px", color: "var(--text-secondary)" }}>
                 {formatDate(item.date)}
               </p>
             </div>
@@ -170,7 +170,9 @@ const TransactionLayout = ({ item, onDelete, transactions, setTransactions }) =>
                     <option value="Travel">Travel</option>
                     <option value="Sports">Sports</option>
                     <option value="Health">Health</option>
-                    <option value="Housing">Housing</option>
+                    <option value="Movies">Movies</option>
+                    <option value="Freelance">Freelance</option>
+                    <option value="Bills">Bills</option>
                     <option value="Others">Others</option>
                   </select>
                 </div>
