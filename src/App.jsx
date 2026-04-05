@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {  Routes, Route } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Transaction from "./Pages/Transaction";
 import Insights from "./Pages/Insights";

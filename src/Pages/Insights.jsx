@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { sampleTransactions } from "../SampleData/Data.js";
 import "../Styles/Insights.css";
 import { CiLight, CiDark } from "react-icons/ci";
+import { useTheme } from "../Components/ThemeContext.jsx";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -15,13 +16,7 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 const Insights = () => {
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "dark",
-  );
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  const { theme, setTheme } = useTheme();
   const isDark =
     document.documentElement.getAttribute("data-theme") !== "light";
   const [transactions] = useState(() => {
@@ -120,7 +115,7 @@ const Insights = () => {
     plugins: {
       legend: {
         position: "bottom",
-        labels: {color: isDark ? "#8b949e" : "#4a5568" , padding: 15 },
+        labels: { color: isDark ? "#8b949e" : "#4a5568", padding: 15 },
       },
       tooltip: {
         backgroundColor: "#1a2035",

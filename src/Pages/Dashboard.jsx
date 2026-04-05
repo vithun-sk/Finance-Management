@@ -5,6 +5,7 @@ import { CiLight, CiDark } from "react-icons/ci";
 import { AiOutlineWallet } from "react-icons/ai";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { BsCreditCard2Back, BsPiggyBank } from "react-icons/bs";
+import { useTheme } from "../Components/ThemeContext.jsx";
 import { Line, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -28,13 +29,7 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "dark",
-  );
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  const { theme, setTheme } = useTheme();
   const [transactions, setTransactions] = useState(() => {
     const stored = localStorage.getItem("transactions");
     return stored ? JSON.parse(stored) : sampleTransactions;
@@ -108,8 +103,7 @@ const Dashboard = () => {
       },
     ],
   };
-  const isDark =
-    document.documentElement.getAttribute("data-theme") !== "light";
+  const isDark = theme !== "light";
 
   const lineOptions = {
     responsive: true,

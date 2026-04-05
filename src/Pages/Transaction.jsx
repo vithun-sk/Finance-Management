@@ -3,17 +3,13 @@ import "../Styles/Transaction.css";
 import TransactionLayout from "../Components/TransactionLayout";
 import { TbArrowsUpDown } from "react-icons/tb";
 import { CiFilter } from "react-icons/ci";
+import { RiDownloadCloud2Line } from "react-icons/ri";
 import { CiLight, CiDark } from "react-icons/ci";
 import { sampleTransactions } from "../SampleData/Data";
+import { useTheme } from "../Components/ThemeContext";
 
 const Transaction = () => {
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "dark",
-  );
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  const { theme, setTheme } = useTheme();
   const [role, setRole] = useState(localStorage.getItem("role") || "Admin");
   useEffect(() => {
     const handleStorageChange = () => {
@@ -118,6 +114,7 @@ const Transaction = () => {
     a.download = "transactions.csv";
     a.click();
     URL.revokeObjectURL(url);
+    alert("File Downloaded Successfully");
   };
 
   const displayedData = isReversed ? [...filtered].reverse() : filtered;
@@ -159,7 +156,9 @@ const Transaction = () => {
               </div>
               <div className="export-addTrans">
                 <button className="export-btn" onClick={handleExportCSV}>
-                  <span className="btn-icon">⬇</span>
+                  <span className="btn-icon">
+                    <RiDownloadCloud2Line />
+                  </span>
                   <span className="btn-text"> Export CSV</span>
                 </button>
                 {role === "Admin" && (
@@ -311,11 +310,6 @@ const Transaction = () => {
                       }
                       onClick={() => {
                         setShowFilter(!showFilters);
-                        setFilterType("All");
-                        setFilterCategory("All");
-                        setFilterDateFrom("");
-                        setFilterDateTo("");
-                        setSearch("");
                       }}
                     >
                       <CiFilter

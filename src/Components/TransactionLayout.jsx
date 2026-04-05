@@ -5,8 +5,6 @@ import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
 const TransactionLayout = ({ item, onDelete, transactions, setTransactions }) => {
   const role = localStorage.getItem("role");
   const [showEditForm, setShowEditForm] = useState(false);
-
-
   const [editTitle, setEditTitle] = useState(item.title);
   const [editAmount, setEditAmount] = useState(item.amount);
   const [editDate, setEditDate] = useState(item.date);
@@ -185,7 +183,7 @@ const TransactionLayout = ({ item, onDelete, transactions, setTransactions }) =>
                   </button>
                   <button
                     type="button"
-                    style={{ backgroundColor: "#4f8ef7" }}
+                    style={{ backgroundColor: "#4f8ef7", color:'white' }}
                     onClick={handleEdit}
                   >
                     Save Changes

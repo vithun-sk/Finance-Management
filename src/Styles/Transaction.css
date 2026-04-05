@@ -451,6 +451,22 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     justify-content: center;
     margin: 0;
   }
+  .transac-overlay-form {
+    width: 100%;
+    max-width: 420px;
+    max-height: 88vh;
+  }
+  .overlay-sec2 button{
+    width: 100px;
+  }
+
+  .form-div input, .form-div select {
+    width: 350px;
+  }
+  .form-actions button{
+    width: 150px;
+    margin-bottom: 20px;
+  }
 
   /* Search + filter row — consistent margin */
   .filter-div {
