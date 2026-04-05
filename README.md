@@ -142,4 +142,5 @@ Feel free to fork this repo and submit a pull request.
 Frontend Developer | MERN Stack Learner
 
 📧 Email: [vithunkumar07@gmail.com]
+
 🔗 LinkedIn: [https://www.linkedin.com/in/vithun-sk/]
